@@ -111,12 +111,14 @@ function main() {
     docker run -it \
         -d --privileged \
         --name apollo_release \
-        --net host \
+        --net bridge \
         -v /media:/media \
         -v ${APOLLO_ROOT_DIR}/data:/apollo/data \
         -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
         -v /etc/localtime:/etc/localtime:ro \
         -v $HOME/.cache:${DOCKER_HOME}/.cache \
+        -p 8887:8887 \
+        -p 8888:8888 \
         -w /apollo \
         -e DISPLAY=${display} \
         -e RELEASE_DOCKER=1 \
